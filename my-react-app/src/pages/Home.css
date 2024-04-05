@@ -1,0 +1,18 @@
+@keyframes spinScaleAndMove {
+    0% { transform: scale(1) translateX(calc(100vw - 50px)); }
+    50% { transform: scale(1) translateX(calc(-100vw + 50px)); }
+    100% { transform: scale(1) translateX(calc(100vw - 50px)); }
+  }
+  
+  .spinScaleAndMove {
+    animation: spinScaleAndMove 10s linear infinite;
+  }
+
+  p {
+    font-size: 30px;
+    color: black;
+  }
+
+  h1 {
+    color: black;
+  }
