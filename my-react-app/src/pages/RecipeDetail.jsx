@@ -59,21 +59,26 @@ const RecipeDetail = () => {
         console.error('Error:', error);
         });
     }, [recipeData]);
+    console.log(recipeData[0].image);
 
   return (
-    <Card style={{ width: 300, marginTop: 16 }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Card style={{ width: 500, marginTop: 16, marginLeft: 80 }}>
       <Meta
         title={`Recipe ID: ${recipeData[0].recipeID}`}
+        style={{color: 'black', fontSize: '15px'}}
         description={
           <>
             <Divider type="horizontal" />
-            Title: {recipeData[0].title} <br />
+            <img src={`/${recipeData[0].image}`} style={{ width: '150px'}} alt="Recipe" /> <br />
+            <div style={{fontSize: '20px', color: 'black'}}>{recipeData[0].title} </div><br />
+            Rate: {recipeData[0].avg_rate ? `${recipeData[0].avg_rate.toFixed(2)} / 5 ` : 'No rate'}
+            {recipeData[0].avg_rate && <Rate disabled allowHalf value={Math.round(recipeData[0].avg_rate * 2) / 2} />} <br />
             Ingredients: {recipeData[0].Ingredients} <br />
             Time: {recipeData[0].time} <br />
             Cost: {recipeData[0].cost} <br />
             Number of Servings: {recipeData[0].numServe} <br />
-            Allergy ID: {recipeData[0].allergyID} <br />
-            Food: {recipeData[0].food} <br />
+            Allergies Food: {recipeData[0].food ? items[0].food : 'None'} <br />
             <Divider type="horizontal" />
             {recipeData.map((item, index) => (
               <div key={index}>
@@ -82,25 +87,29 @@ const RecipeDetail = () => {
                 <Divider type="horizontal" />
               </div>
             ))}
-            {comments.map((comment, index) => (
-              <div key={index}>
-                <p>{comment.comment}</p>
-                <Rate disabled value={comment.rate} />
-                <p>Date posted: {comment.date}</p>
-              </div>
-            ))}
-            <Button onClick={handleAddComment}>Add Comment</Button>
-            {showCommentInput && (
-              <>
-                <TextArea rows={4} value={comment} onChange={e => setComment(e.target.value)} />
-                <Rate value={rating} onChange={setRating} />
-                <Button onClick={handleSubmitComment}>Submit Comment</Button>
-              </>
-            )}
+            
           </>
         }
       />
     </Card>
+    <div style={{ width: '600px'}}>
+    {comments.map((comment, index) => (
+      <div key={index}>
+        <p>{comment.comment}</p>
+        <Rate disabled value={comment.rate} />
+        <p>Date posted: {comment.date}</p>
+      </div>
+    ))}
+    <Button onClick={handleAddComment}>Add Comment</Button>
+    {showCommentInput && (
+      <>
+        <TextArea rows={4} value={comment} onChange={e => setComment(e.target.value)} />
+        <Rate value={rating} onChange={setRating} />
+        <Button onClick={handleSubmitComment}>Submit Comment</Button>
+      </>
+    )}
+  </div>
+</div>
   );
 };
 

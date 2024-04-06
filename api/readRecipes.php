@@ -15,9 +15,10 @@ $pdo = new PDO($dsn, $username, $password, $opt);
 
 $query = "
     SELECT 
-        recipes. title, recipes.recipeID, recipes.time, recipes.cost, recipes.numServe, recipes.Ingredients,
-        steps.stepNum, steps.description, steps.image,
-        allergies.allergyID, allergies.food
+        recipes.title, recipes.recipeID, recipes.time, recipes.cost, recipes.numServe, recipes.Ingredients,
+        steps.stepNum, steps.description, steps.image, recipes.image,
+        allergies.allergyID, allergies.food,
+        (SELECT AVG(comments.rate) FROM comments WHERE comments.recipe_id = recipes.recipeID) as avg_rate
     FROM recipes
     LEFT JOIN steps ON recipes.recipeID = steps.fk_recipe_id
     LEFT JOIN post_allergies ON recipes.recipeID = post_allergies.post_id

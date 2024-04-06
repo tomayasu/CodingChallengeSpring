@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Divider, Input, Select } from 'antd';
+import { Card, Row, Col, Divider, Input, Select, Rate } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // or use fetch API
 
@@ -31,24 +31,19 @@ const Posts = ({ data }) => {
           <Card style={{ width: '100%', marginTop: 25 }} onClick={() => handleCardClick(items[0].recipeID)}>
             <Meta
               title={`Recipe ID: ${items[0].recipeID}`}
+              style={{color: 'black', fontSize: '15px'}}
               description={
                 <>
                   <Divider type="horizontal" />
-                  Title: {items[0].title} <br />
+                  <img src={items[0].image} style={{ width: '150px'}} alt="Recipe" /> <br />
+                  Rate: {items[0].avg_rate ? `${items[0].avg_rate.toFixed(2)} / 5 ` : 'No rate'}
+                  {items[0].avg_rate && <Rate disabled allowHalf value={Math.round(items[0].avg_rate * 2) / 2} />} <br />
+                  <div style={{fontSize: '20px', color: 'black'}}>Title: {items[0].title} </div><br />
                   Ingredients: {items[0].Ingredients} <br />
                   Time: {items[0].time} <br />
                   Cost: {items[0].cost} <br />
                   Number of Servings: {items[0].numServe} <br />
-                  Allergy ID: {items[0].allergyID} <br />
-                  Food: {items[0].food} <br />
-                  <Divider type="horizontal" />
-                  {items.map((item, index) => (
-                    <div key={index}>
-                      Step Number: {item.stepNum} <br />
-                      Description: {item.description} <br />
-                      <Divider type="horizontal" />
-                    </div>
-                  ))}
+                  Allergies Food: {items[0].food ? items[0].food : 'None'} <br />
                 </>
               }
             />
@@ -68,7 +63,10 @@ const RecipePost = () => {
   useEffect(() => {
     fetch('http://localhost/CodingChallengeSpring/api/readRecipes.php')
       .then(response => response.json())
-      .then(data => setData(data));
+      .then(data => {
+        setData(data);
+        console.log(data);
+      });
   }, []);
 
   const filterByAllergies = (data, allergyFilter) => {

@@ -9,6 +9,7 @@ const RecipeCreate = () => {
 
     const { Option } = Select;
     const [allergies, setAllergies] = useState([]);
+    const [styles, setStyles] = useState([]);
     const [title, setTitle] = useState('');
     const [hasAttemptedInput, setHasAttemptedInput] = useState(false);
     const [time, setTime] = useState('');
@@ -17,6 +18,8 @@ const RecipeCreate = () => {
     const [ingredients, setIngredients] = useState('');
     const [categories, setCategories] = useState('');
     const [selectedAllergies, setSelectedAllergies] = useState([]);
+    const [selectedStyles, setSelectedStyles] = useState([]);
+
 
     const handleSubmit = async () => {
         if (!title || !time || !cost || !numServe || !ingredients) {
@@ -64,6 +67,20 @@ const RecipeCreate = () => {
           }
         };
         fetchAllergies();
+    }, []);
+
+    useEffect(() => {
+        //console.log('RecipeCreate component mounted'); // Add this line
+        const fetchStyles = async () => {
+          try {
+            const response = await axios.get('http://localhost/CodingChallengeSpring/api/styles.php'); // replace with your API endpoint
+            setStyles(response.data);
+            console.log('Styles:', response.data);
+          } catch (error) {
+            console.error('Failed to fetch styles:', error);
+          }
+        };
+        fetchStyles();
     }, []);
 
     const onChange = (e) => {
@@ -135,6 +152,24 @@ const RecipeCreate = () => {
                         allowClear 
                         onChange={e => setIngredients(e.target.value)}
                     />
+                </Space>
+                <Space style={{ width: '75%' }}>
+                    <div>Food Styles</div>
+                    <Select
+                        mode="multiple"
+                        size="large"
+                        placeholder="Select Styles"
+                        allowClear
+                        style={{ width: 200 }}
+                        onChange={setSelectedStyles}
+                        filterOption={(input, option) => // Add this line
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 // Add this line
+                        }
+                    >
+                        {Array.isArray(styles) && styles.map((style) => (
+                        <Option key={style.styleID} value={style.styleID}>{style.style}</Option>
+                        ))}
+                    </Select>
                 </Space>
                 <Space style={{ width: '75%' }}>
                     <div>Allergies</div>
