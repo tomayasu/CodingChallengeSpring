@@ -104,123 +104,144 @@ const RecipeCreate = () => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Space direction="vertical">
-                <Space>
-                    <div>Title</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Title" 
-                        status={hasAttemptedInput ? "error" : ""} 
-                        allowClear 
-                        onChange={e => setTitle(e.target.value)}
-                        onBlur={onBlur}
-                        value={title}
-                    />
-                </Space>
-                <Space>
-                    <div>Estimated Time</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Estimated Time" 
-                        allowClear 
-                        onChange={e => setTime(e.target.value)}
-                    />
-                </Space>
-                <Space>
-                    <div>Estimated Cost</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Estimated Cost" 
-                        allowClear 
-                        onChange={e => setCost(e.target.value)}
-                    />
-                </Space>
-                <Space>
-                    <div>Number of Serving</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Number of Serving" 
-                        allowClear 
-                        onChange={e => setNumServe(e.target.value)}
-                    />
-                </Space>
-                <Space>
-                    <div>Ingredients</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Ingredients" 
-                        allowClear 
-                        onChange={e => setIngredients(e.target.value)}
-                    />
-                </Space>
-                <Space style={{ width: '75%' }}>
-                    <div>Food Styles</div>
-                    <Select
-                        mode="multiple"
-                        size="large"
-                        placeholder="Select Styles"
-                        allowClear
-                        style={{ width: 200 }}
-                        onChange={setSelectedStyles}
-                        filterOption={(input, option) => // Add this line
-                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 // Add this line
-                        }
-                    >
-                        {Array.isArray(styles) && styles.map((style) => (
-                        <Option key={style.styleID} value={style.styleID}>{style.style}</Option>
-                        ))}
-                    </Select>
-                </Space>
-                <Space style={{ width: '75%' }}>
-                    <div>Allergies</div>
-                    <Select
-                        mode="multiple"
-                        size="large"
-                        placeholder="Select Allergies"
-                        allowClear
-                        style={{ width: 200 }}
-                        onChange={setSelectedAllergies}
-                        filterOption={(input, option) => // Add this line
-                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 // Add this line
-                        }
-                    >
-                        {Array.isArray(allergies) && allergies.map((allergy) => (
-                        <Option key={allergy.allergyID} value={allergy.allergyID}>{allergy.food}</Option>
-                        ))}
-                    </Select>
-                </Space>
-                <Space>
-                    <div>Categories</div>
-                    <Input 
-                        size="large" 
-                        placeholder="Categories" 
-                        allowClear 
-                        onChange={e => setCategories(e.target.value)}
-                    />
-                </Space>
-                <Space direction="vertical">
-                    {steps.map((step, index) => (
-                        <Space key={index}>
-                            <div>Step {index + 1}</div>
-                            <Input
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Title</td>
+                        <td>
+                            <Input 
                                 size="large" 
-                                placeholder={`Step ${index + 1}`} 
-                                allowClear
-                                onChange={e => {
-                                    const newSteps = [...steps];
-                                    newSteps[index] = { stepNum: index + 1, description: e.target.value };
-                                    setSteps(newSteps);
-                                }}
+                                placeholder="Title" 
+                                status={hasAttemptedInput ? "error" : ""} 
+                                allowClear 
+                                onChange={e => setTitle(e.target.value)}
+                                onBlur={onBlur}
+                                value={title}
                             />
-                            <Button icon={<UploadOutlined />}>Click to Upload Image</Button>
-                        </Space>
-                    ))}
-                </Space>
-                <Button type="primary" icon={<PlusSquareOutlined />} onClick={addStep}>Add a Step</Button>
-                <Button type="primary" icon={<PlusSquareOutlined />} onClick={handleSubmit}>Submit a Post</Button>
-            </Space>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estimated Time</td>
+                        <td>
+                            <Input 
+                                size="large" 
+                                placeholder="Estimated Time" 
+                                allowClear 
+                                onChange={e => setTime(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estimated Cost</td>
+                        <td>
+                            <Input 
+                                size="large" 
+                                placeholder="Estimated Cost" 
+                                allowClear 
+                                onChange={e => setCost(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Number of Serving</td>
+                        <td>
+                            <Input 
+                                size="large" 
+                                placeholder="Number of Serving" 
+                                allowClear 
+                                onChange={e => setNumServe(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ingredients</td>
+                        <td>
+                            <Input 
+                                size="large" 
+                                placeholder="Ingredients" 
+                                allowClear 
+                                onChange={e => setIngredients(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Food Styles</td>
+                        <td>
+                            <Select
+                                mode="multiple"
+                                size="large"
+                                placeholder="Select Styles"
+                                allowClear
+                                style={{ width: 200 }}
+                                onChange={setSelectedStyles}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {Array.isArray(styles) && styles.map((style) => (
+                                <Option key={style.styleID} value={style.styleID}>{style.style}</Option>
+                                ))}
+                            </Select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Allergies</td>
+                        <td>
+                            <Select
+                                mode="multiple"
+                                size="large"
+                                placeholder="Select Allergies"
+                                allowClear
+                                style={{ width: 200 }}
+                                onChange={setSelectedAllergies}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {Array.isArray(allergies) && allergies.map((allergy) => (
+                                <Option key={allergy.allergyID} value={allergy.allergyID}>{allergy.food}</Option>
+                                ))}
+                            </Select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Categories</td>
+                        <td>
+                            <Input 
+                                size="large" 
+                                placeholder="Categories" 
+                                allowClear 
+                                onChange={e => setCategories(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Steps</td>
+                        <td>
+                            {steps.map((step, index) => (
+                                <div key={index}>
+                                    <div>Step {index + 1}</div>
+                                    <Input
+                                        size="large" 
+                                        placeholder={`Step ${index + 1}`} 
+                                        allowClear
+                                        onChange={e => {
+                                            const newSteps = [...steps];
+                                            newSteps[index] = { stepNum: index + 1, description: e.target.value };
+                                            setSteps(newSteps);
+                                        }}
+                                    />
+                                    <Button icon={<UploadOutlined />}>Click to Upload Image</Button>
+                                </div>
+                            ))}
+                            <Button type="primary" icon={<PlusSquareOutlined />} onClick={addStep}>Add a Step</Button> <br />
+                            <Button type="primary" icon={<PlusSquareOutlined />} onClick={handleSubmit}>Submit a Post</Button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 };
-
 export default RecipeCreate;
