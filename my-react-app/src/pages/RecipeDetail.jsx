@@ -78,7 +78,7 @@ const RecipeDetail = () => {
             Time: {recipeData[0].time} <br />
             Cost: {recipeData[0].cost} <br />
             Number of Servings: {recipeData[0].numServe} <br />
-            Allergies Food: {recipeData[0].food ? items[0].food : 'None'} <br />
+            Allergies Food: {recipeData[0].food ? recipeData[0].food : 'None'} <br />
             <Divider type="horizontal" />
             {recipeData.map((item, index) => (
               <div key={index}>
