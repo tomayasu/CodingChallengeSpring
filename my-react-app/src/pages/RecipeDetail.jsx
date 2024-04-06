@@ -63,10 +63,12 @@ const RecipeDetail = () => {
   return (
     <Card style={{ width: 300, marginTop: 16 }}>
       <Meta
-        title={`Recipe ID: ${recipeData[0].recipeID}, Ingredients: ${recipeData[0].Ingredients}`}
+        title={`Recipe ID: ${recipeData[0].recipeID}`}
         description={
           <>
             <Divider type="horizontal" />
+            Title: {recipeData[0].title} <br />
+            Ingredients: {recipeData[0].Ingredients} <br />
             Time: {recipeData[0].time} <br />
             Cost: {recipeData[0].cost} <br />
             Number of Servings: {recipeData[0].numServe} <br />

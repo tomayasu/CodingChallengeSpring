@@ -15,7 +15,7 @@ $pdo = new PDO($dsn, $username, $password, $opt);
 
 $query = "
     SELECT 
-        recipes.recipeID, recipes.time, recipes.cost, recipes.numServe, recipes.Ingredients,
+        recipes. title, recipes.recipeID, recipes.time, recipes.cost, recipes.numServe, recipes.Ingredients,
         steps.stepNum, steps.description, steps.image,
         allergies.allergyID, allergies.food
     FROM recipes

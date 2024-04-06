@@ -6,7 +6,7 @@ import { HomeOutlined, MessageOutlined, StarOutlined, UserOutlined, FormOutlined
 
 const menuItems = [
     { key: '1', label: 'Home', path: '/', icon: <HomeOutlined /> },
-    { key: '2', label: 'Post', path: '/Post', icon: <UnorderedListOutlined /> },
+    /*{ key: '2', label: 'Post', path: '/Post', icon: <UnorderedListOutlined /> },*/
     { key: '3', label: 'Message', path: '/Message', icon: <MessageOutlined /> },
     { key: '4', label: 'Recipes Posts', path: '/RecipePost', icon: <UnorderedListOutlined /> },
     { key: '5', label: 'Create Recipes Post', path: '/RecipeCreate', icon: <FormOutlined /> },

@@ -145,6 +145,9 @@ const RecipeCreate = () => {
                         allowClear
                         style={{ width: 200 }}
                         onChange={setSelectedAllergies}
+                        filterOption={(input, option) => // Add this line
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 // Add this line
+                        }
                     >
                         {Array.isArray(allergies) && allergies.map((allergy) => (
                         <Option key={allergy.allergyID} value={allergy.allergyID}>{allergy.food}</Option>
